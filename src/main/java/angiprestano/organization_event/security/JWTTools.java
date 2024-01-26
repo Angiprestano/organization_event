@@ -1,4 +1,5 @@
 package angiprestano.organization_event.security;
+import angiprestano.organization_event.entities.NormalUser;
 import angiprestano.organization_event.exceptions.UnauthorizedException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -13,9 +14,9 @@ public class JWTTools {
   @Value("${spring.jwt.secret}")
     private String secret;
 
-    //creiazione del token
-    public String CreateToken(User user){
-        return Jwts.builder().subject(String.valueOf(user.getAuthorities()))// subject: A chi appartiene il token (id dell'utente)
+    //creazione del token
+    public String CreateToken(NormalUser normalUser){
+        return Jwts.builder().subject(String.valueOf(normalUser.getId()))// subject: A chi appartiene il token (id dell'utente)
                 .issuedAt(new Date(System.currentTimeMillis()))       // Data di emissione (IAT - Issued At)
                 .expiration(new  Date(System.currentTimeMillis()+1000*60*60*24*7))// Data di scadenza del token (Expiration Date)
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes())) //firmo il token con il nostro secret
