@@ -1,8 +1,6 @@
 package angiprestano.organization_event.entities;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,11 +9,14 @@ import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
-
+@Entity
+@Table(name = "events")
 @Getter
 @Setter
 @ToString
 public class Event {
+    @Id
+    @GeneratedValue
     private UUID id;
     private String title;
     private String description;
